@@ -11,5 +11,7 @@ const path = require('path');
 //   );
 // }
 // (async () => {})();
-// process.stdout.write('major');
+process.stdout.write('major');
 console.log('minor');
+console.log('okay what about this');
+process.stdout.write('and this');
