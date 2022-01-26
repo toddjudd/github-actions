@@ -11,3 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: cat $GITHUB_EVENT_PATH
+      - run: sudo apt-get install jq
+      - run: jq --help
