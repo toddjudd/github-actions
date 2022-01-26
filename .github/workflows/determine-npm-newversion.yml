@@ -19,5 +19,5 @@ jobs:
       - run: echo $NEWVERSION
       - run: cat $GITHUB_EVENT_PATH
       - run: jq --help
-      - run: ls
-      - run: node ./.github/test.js
+      - run: ls -al
+      - run: node .github/workflows/test.js
