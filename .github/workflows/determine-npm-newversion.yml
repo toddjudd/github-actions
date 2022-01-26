@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: cat $NEWVERSION
+      - run: echo $NEWVERSION
       - run: cat $GITHUB_EVENT_PATH
       - run: jq --help
       - run: ls
