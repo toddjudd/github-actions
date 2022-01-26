@@ -21,3 +21,5 @@ jobs:
       - run: jq --help
       - run: ls -al
       - run: node .github/workflows/test.js
+      - run: echo "NEWVERSION=$(echo "feat")" >> $GITHUB_ENV
+      - run: echo $NEWVERSION
