@@ -11,4 +11,5 @@ const path = require('path');
 //   );
 // }
 // (async () => {})();
-process.stdout.write('major');
+// process.stdout.write('major');
+console.log('minor');
