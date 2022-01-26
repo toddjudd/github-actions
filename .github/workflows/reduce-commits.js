@@ -14,7 +14,7 @@ if (!event.commits) {
 }
 
 const newVersion = event.commits.some((commit) =>
-  commit.message.matches(/BREAKING CHANGE/gim)
+  commit.message.match(/BREAKING CHANGE/gim)
 )
   ? 'major'
   : versionTypes[
