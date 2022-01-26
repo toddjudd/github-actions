@@ -13,20 +13,22 @@ if (!event.commits) {
   );
 }
 
-const newVersion =
-  (commits.some((commit) => commit.message.matches(/BREAKING CHANGE/gim)) &&
-    'major') ||
-  versionTypes[
-    Math.max(
-      ...event.commits.map((commit) =>
-        versionTypes.findIndex(
-          (vt) =>
-            vt ==
-            commitTypes.find((t) => t.type === commit.message.split(/\(\:/)[0])
-              .newversionType
+const newVersion = commits.some((commit) =>
+  commit.message.matches(/BREAKING CHANGE/gim)
+)
+  ? 'major'
+  : versionTypes[
+      Math.max(
+        ...event.commits.map((commit) =>
+          versionTypes.findIndex(
+            (vt) =>
+              vt ==
+              commitTypes.find(
+                (t) => t.type === commit.message.split(/\(\:/)[0]
+              ).newversionType
+          )
         )
       )
-    )
-  ];
+    ];
 
 process.stdout.write(newVersion || 'broken');
