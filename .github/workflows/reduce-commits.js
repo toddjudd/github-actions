@@ -5,7 +5,7 @@ const versionTypes = ['patch', 'minor', 'major'];
 
 const event = process.env.GITHUB_EVENT_PATH
   ? require(process.env.GITHUB_EVENT_PATH)
-  : {};
+  : require('./test-env.json');
 
 if (!event.commits) {
   console.log(
@@ -24,7 +24,7 @@ const newVersion = event.commits.some((commit) =>
             (vt) =>
               vt ==
               commitTypes.find(
-                (t) => t.type === commit.message.split(/\(\:/)[0]
+                (t) => t.type === commit.message.split(/\(|\:/)[0]
               ).newversionType
           )
         )
