@@ -1,5 +1,8 @@
 name: Determine NPM Version newversion Type
 
+env:
+  NEWVERSION: patch
+
 on:
   push:
     branches:
@@ -10,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: cat $NEWVERSION
       - run: cat $GITHUB_EVENT_PATH
-      - run: sudo apt-get install jq
       - run: jq --help
+      - run: ls
+      - run: node ./.github/test.js
