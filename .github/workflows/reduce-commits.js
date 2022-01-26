@@ -13,7 +13,7 @@ if (!event.commits) {
   );
 }
 
-const newVersion = commits.some((commit) =>
+const newVersion = event.commits.some((commit) =>
   commit.message.matches(/BREAKING CHANGE/gim)
 )
   ? 'major'
