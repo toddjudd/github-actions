@@ -1,0 +1,19 @@
+# This is a workflow to test how to set up a PR validation workflow
+# Questions:
+# 1. if I have a test that fails on PR does that block the merge?
+# A1.
+
+name: Validate Pull Request
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pull request events but only for the main branch
+  pull_request:
+    branches: [main]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
