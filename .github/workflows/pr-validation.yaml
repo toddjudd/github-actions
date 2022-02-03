@@ -1,7 +1,7 @@
 # This is a workflow to test how to set up a PR validation workflow
 # Questions:
 # 1. if I have a test that fails on PR does that block the merge?
-# A1.
+# A1. Yes, by default exiting with a non zero exit code blocks the PR
 
 name: Validate Pull Request
 
@@ -16,4 +16,4 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
+      - run: exit 0
