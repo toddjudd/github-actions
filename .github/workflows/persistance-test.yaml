@@ -1,6 +1,7 @@
 # This is a workflow to test how servers act between jobs.
 # Questions:
 # 1. if I install node and use the same server version is node still avaliable?
+# A1. No node happens to be avaliable but if you install not 17 you can see in the second machine the version is still 16.
 
 name: Persistance Test
 
