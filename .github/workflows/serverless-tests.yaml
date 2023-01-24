@@ -24,7 +24,7 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - run: npm -v
-      - run: bundle install
+      - run: ruby -v
       - run: docker -v
       - run: docker-compose -v
       - run: ls /usr/lib64
