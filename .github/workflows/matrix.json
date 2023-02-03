@@ -1,0 +1,14 @@
+[
+  {
+    "stage": "sandbox",
+    "runOn": "main"
+  },
+  {
+    "stage": "production",
+    "runOn": "main"
+  },
+  {
+    "stage": "dev",
+    "runOn": "develop"
+  }
+]

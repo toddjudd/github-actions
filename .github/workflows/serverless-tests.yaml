@@ -12,6 +12,7 @@ jobs:
         ruby-version: [3.2]
         node-version: [16.x]
         stage: ['dev']
+        region: ['us-east-1']
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -31,7 +32,10 @@ jobs:
       - name: serverless deploy
         uses: serverless/github-action@v3.1
         with:
-          args: deploy --stage ${{matrix.stage}}
+          args:
+            -c "serverless plugin install --name serverless-ruby-layer &&
+            serverless plugin install --name serverless-rack && serverless
+            deploy --stage ${{matrix.stage}} --region ${{matrix.region}}"
         env:
           # SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           # or if using AWS credentials directly
