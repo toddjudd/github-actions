@@ -20,7 +20,7 @@ jobs:
           branchName=$(echo '${{ github.ref }}' | sed 's,refs/heads/,,g')  
           matrix=$(jq --arg branchName "$branchName" 'map( 
               . | select((.runOn==$branchName) or (.runOn=="always"))
-          )' .github/workflos/matrix.json)                
+          )' .github/workflows/matrix.json)                
           echo "matrix={\"include\":$(echo $matrix)}" >> $GITHUB_OUTPUT
   print:
     name: Print Matrix Variables
