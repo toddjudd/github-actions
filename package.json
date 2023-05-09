@@ -1,6 +1,6 @@
 {
   "name": "github-actions",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Lean and test Github actions in the wild",
   "main": "index.js",
   "scripts": {
