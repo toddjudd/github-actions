@@ -10,3 +10,5 @@ jobs:
         run: npm run test:coverage
       - name: Generating coverage badges
         uses: jpb06/jest-badges-action@latest
+      - name: Jest Coverage Comment
+        uses: MishaKav/jest-coverage-comment@main
