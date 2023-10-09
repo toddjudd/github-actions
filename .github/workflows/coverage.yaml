@@ -7,7 +7,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Tests
-        run: npm run test:coverage
+        run: npm run test:cov
       - name: Generating coverage badges
         uses: jpb06/jest-badges-action@latest
       - name: Jest Coverage Comment
