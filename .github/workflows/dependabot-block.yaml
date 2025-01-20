@@ -21,7 +21,7 @@ jobs:
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/${{ github.repository }}/issues?state=open")
 
-          dependabot_issues=$(echo "$issues" | jq '[.[] | select(.title | contains("dependabot"))]')
+          dependabot_issues=$(echo "$issues" | jq '[.[] | select(.user.login | contains("dependabot"))]')
 
           if [ $(echo "$dependabot_issues" | jq 'length') -gt 0 ]; then
             echo "::error::Blocking merge: Open Dependabot issues found."
