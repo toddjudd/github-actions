@@ -13,7 +13,19 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  dependabot_check:
+    name: Check for Dependabot PRs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Dependabot Issues
+        id: dependabot_check
+        uses: toddjudd/github-actions-workflows/.github/workflows/dependabot-check.yml@main
+      - name: Exit if Dependabot issues found
+        if:
+          ${{ steps.dependabot_check.outputs.dependabot_issues_found == 'true'}}
+        run: exit 1
   test:
+    needs: [dependabot_check]
     runs-on: ubuntu-latest
     steps:
       - run: exit 0
