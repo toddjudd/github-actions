@@ -53,6 +53,12 @@ jobs:
           jq '.files | map(select(.offenses | length == 0) | .path)' .rubocop/report.json > .rubocop/clean_files.json
           jq '.files | map(select(.offenses | length > 0) | .path)' .rubocop/report.json > .rubocop/offending_files.json
 
+      - name: cat clean files
+        run: cat .rubocop/clean_files.json
+
+      - name: cat offending files
+        run: cat .rubocop/offending_files.json
+
       - name: Remove fully lintable files from the exclude list
         id: update_exclude
         run: |
