@@ -2,3 +2,4 @@ AllCops:
   Exclude:
     - 'vendor/*/**'
     - 'vendor/**/*'
+    - 'src/file1.rb'
