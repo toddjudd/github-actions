@@ -39,7 +39,7 @@ jobs:
         id: rubocop_full
         continue-on-error: true
         env:
-          RUBOCOP_ENV: ci
+          RUBOCOP_ENV: CI
         run: bundle exec rubocop --format json > .rubocop/report.json || true
 
       - name: cat rubocop report
