@@ -20,7 +20,19 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.4.1'
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Troubleshoot
+        run: |
+          echo "Checking Ruby version..."
+          ruby -v
+          echo "Checking Bundler version..."
+          bundle -v
+          echo "checking rubocop version..."
+          bundle exec rubocop -v
+          echo "checking ls -la"
+          ls -la
+          echo "checking pwd"
+          pwd
 
       - name: Run RuboCop on all files
         id: rubocop_full
