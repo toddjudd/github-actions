@@ -106,6 +106,9 @@ jobs:
           CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }} | grep '\.rb$' || true)
           echo "$CHANGED_FILES" > changed_files.txt
 
+      - name: cat changed files
+        run: cat changed_files.txt
+
       - name: Run Auto-fix on changed files only
         id: rubocop_autofix
         continue-on-error: true
