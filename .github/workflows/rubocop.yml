@@ -1,0 +1,79 @@
+name: RuboCop Linting
+
+on:
+  pull_request:
+    branches:
+      # todo: update to match branch/merge strategy
+      - main
+      - develop
+      - feature/*
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.1'
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Run RuboCop on all files
+        id: rubocop_full
+        continue-on-error: true
+        env:
+          RUBOCOP_ENV: ci
+        run:
+          bundle exec rubocop --format json > .rubocop/report.json && cat
+          .rubocop/report.json
+
+      - name: Process RuboCop Results
+        id: process_results
+        run: |
+          echo "Parsing RuboCop results..."
+          mkdir -p .rubocop
+          jq '.files | map(select(.offenses | length == 0) | .path)' .rubocop/report.json > .rubocop/clean_files.json
+          jq '.files | map(select(.offenses | length > 0) | .path)' .rubocop/report.json > .rubocop/offending_files.json
+
+      - name: Remove fully lintable files from the exclude list
+        id: update_exclude
+        run: |
+          CLEAN_FILES=$(jq -r '.[]' .rubocop/clean_files.json)
+          if [[ -n "$CLEAN_FILES" ]]; then
+            echo "Removing clean files from .rubocop/exclusions.yml..."
+            sed -i -e "/exclude:/,/^\s*$/ { /$(echo "$CLEAN_FILES" | tr '\n' '|')/d }" .rubocop/exclusions.yml...
+            git config --global user.name "${{ github.actor }}"
+            git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+            git add .rubocop/exclusions.yml
+            git commit -m "ci: Removing fully lintable files from exclusion list [skip ci]"
+            git push
+          fi
+        continue-on-error: true
+
+      - name: Get changed files in PR
+        id: changed_files
+        run: |
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }} | grep '\.rb$' || true)
+          echo "$CHANGED_FILES" > changed_files.txt
+
+      - name: Run Auto-fix on changed files only
+        id: rubocop_autofix
+        continue-on-error: true
+        run: |
+          echo "Running auto-corrections on changed files..."
+          if [[ -s changed_files.txt ]]; then
+            bundle exec rubocop -a $(cat changed_files.txt) || true
+            git add $(cat changed_files.txt)
+            if ! git diff --cached --quiet; then
+              git commit -m "Auto-fixed RuboCop offenses in changed files"
+              git push
+            fi
+          fi
+
+      - name: Final RuboCop Check (Blocking Step)
+        run: |
+          bundle exec rubocop
