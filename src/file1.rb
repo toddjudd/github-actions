@@ -14,7 +14,7 @@ class Greeter
 end
 
 # Create an instance of the class
-greeter = Greeter.new("Todd")
+greeter = Greeter.new('Todd')
 
 # Call the greet method
 puts greeter.greet
