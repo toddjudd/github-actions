@@ -103,7 +103,7 @@ jobs:
       - name: Get changed files in PR
         id: changed_files
         run: |
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }} | grep '\.rb$' || true)
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }} || true)
           echo "$CHANGED_FILES" > changed_files.txt
 
       - name: cat changed files
