@@ -116,7 +116,11 @@ jobs:
             if ! git diff --cached --quiet; then
               git commit -m "Auto-fixed RuboCop offenses in changed files"
               git push
+            else
+              echo "No changes to commit."
             fi
+          else
+            echo "No Ruby files changed in this PR."
           fi
 
       - name: Final RuboCop Check (Blocking Step)
