@@ -18,6 +18,10 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+      - name: setup git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Install ruby and gems
         uses: ruby/setup-ruby@v1
@@ -91,8 +95,6 @@ jobs:
         run: |
           git status --porcelain .rubocop/exclusions.yml
           if [ -n "$(git status --porcelain .rubocop/exclusions.yml)" ]; then
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .rubocop/exclusions.yml
           git commit -m "ci: Removing fully lintable files from exclusion list [skip ci]"
           git push
