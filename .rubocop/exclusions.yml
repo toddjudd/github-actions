@@ -6,3 +6,4 @@ AllCops:
     - 'ruby/file4.rb'
     - 'ruby/file5.rb'
     - 'ruby/file6.rb'
+    - 'vendor/*/**'
