@@ -1,10 +1,24 @@
 # ERB Template - only include file exclusions outside CI environment
 #<% if ENV['RUBOCOP_ENV'] != 'CI' %>
 inherit_from: ./.rubocop/exclusions.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+    - AllCops
 #<% end %>
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - 'node_moduleQs/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/{rails,rake}'
 
 Layout/LineLength:
   Enabled: false
