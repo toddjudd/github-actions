@@ -1,10 +1,5 @@
 AllCops:
   Exclude:
     - 'src/file1.rb'
-    - 'src/file2.rb'
-    - 'src/file3.rb'
-    - 'src/file4.rb'
-    - 'src/file5.rb'
-    - 'src/file6.rb'
     - 'vendor/*/**'
     - 'vendor/**/*'

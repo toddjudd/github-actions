@@ -106,3 +106,4 @@ dist
 .rubocop/clean_files.json
 .gitignore
 .rubocop/report.json
+.rubocop/offending_files.json
