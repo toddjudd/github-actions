@@ -40,9 +40,10 @@ jobs:
         continue-on-error: true
         env:
           RUBOCOP_ENV: ci
-        run:
-          bundle exec rubocop --format json > .rubocop/report.json && cat
-          .rubocop/report.json
+        run: bundle exec rubocop --format json > .rubocop/report.json
+
+      - name: cat rubocop report
+        run: cat .rubocop/report.json
 
       - name: Process RuboCop Results
         id: process_results
