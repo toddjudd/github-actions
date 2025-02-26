@@ -80,16 +80,18 @@ jobs:
             ' .rubocop/exclusions.yml > .rubocop/exclusions.yml.tmp
 
             mv .rubocop/exclusions.yml.tmp .rubocop/exclusions.yml
-
-            git config --global user.name "${{ github.actor }}"
-            git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-            git add .rubocop/exclusions.yml
-            git commit -m "ci: Removing fully lintable files from exclusion list [skip ci]"
-            git push
           else
             echo "No clean files to remove from exclusion list."
           fi
         continue-on-error: true
+
+      - name: commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "ci: Removing fully lintable files from exclusion list [skip ci]"
+          git push
 
       - name: Get changed files in PR
         id: changed_files
