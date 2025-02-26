@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install ruby and gems
         uses: ruby/setup-ruby@v1
@@ -78,7 +80,6 @@ jobs:
               inside_exclude && $0 ~ pat {next}
               {print}
             ' .rubocop/exclusions.yml > .rubocop/exclusions.yml.tmp
-
             mv .rubocop/exclusions.yml.tmp .rubocop/exclusions.yml
           else
             echo "No clean files to remove from exclusion list."
