@@ -80,6 +80,8 @@ jobs:
             git add .rubocop/exclusions.yml
             git commit -m "ci: Removing fully lintable files from exclusion list [skip ci]"
             git push
+          else
+            echo "No clean files to remove from exclusion list."
           fi
         continue-on-error: true
 
