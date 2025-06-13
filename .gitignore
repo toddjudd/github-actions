@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+.DS_Store
+.rubocop/clean_files.json
+.gitignore
+.rubocop/report.json
+.rubocop/offending_files.json

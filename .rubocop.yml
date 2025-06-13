@@ -1,0 +1,69 @@
+# ERB Template - only include file exclusions outside CI environment
+#<% if ENV['RUBOCOP_ENV'] != 'CI' %>
+inherit_from: ./.rubocop/exclusions.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+    - AllCops
+#<% end %>
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'node_moduleQs/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/{rails,rake}'
+
+Layout/LineLength:
+  Enabled: false
+
+Lint/SafeNavigationChain:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+# Below are Andrew McCauley's maybe too strong opinions
+
+# Start
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+  Max: 7
+
+Style/Documentation:
+  Enabled: false
+
+# Maybe one day
+Metrics/AbcSize:
+  Enabled: false
+
+# Maybe one day
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+# Maybe one day
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+# Maybe one day
+Metrics/BlockLength:
+  Enabled: false
+
+Style/StringConcatenation:
+  Mode: conservative
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+# End
