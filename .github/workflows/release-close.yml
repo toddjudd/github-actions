@@ -1,0 +1,20 @@
+name: Release Branch - Deploy Canary
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  log-current-branch-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Log current branch file
+        run: |
+          echo "Current branch file:"
+          cat branch.txt || echo "branch.txt not found"
