@@ -12,9 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Log current branch file
         run: |
           echo "Current branch file:"
           cat branch.txt || echo "branch.txt not found"
+          echo "Current branch: ${{ github.head_ref }}"
+          echo "Current commit: ${{ github.sha }}"
