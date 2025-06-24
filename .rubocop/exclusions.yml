@@ -1,8 +1,5 @@
 AllCops:
   Exclude:
-    - 'ruby/file1.rb'
-    - 'ruby/file2.rb'
-    - 'ruby/file3.rb'
-    - 'ruby/file4.rb'
-    - 'ruby/file5.rb'
-    - 'ruby/file6.rb'
+    - 'vendor/*/**'
+    - 'vendor/**/*'
+    - 'src/file1.rb'
