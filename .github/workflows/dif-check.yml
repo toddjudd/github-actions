@@ -1,0 +1,24 @@
+name: dif check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Ensure version file has been changed
+        run: |
+          git fetch origin main
+          if ! git diff --quiet origin/main -- version.txt; then
+            echo "Version file has been updated"
+            exit 0
+          else
+            echo "Error: version.txt file must be updated in this PR"
+            exit 1
+          fi
